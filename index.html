@@ -622,10 +622,18 @@ function readSlotsFromDom(){
 }
 
 function copiarParaTodos(){
+  // garante que activeTypeTabId está preenchido
+  if(!activeTypeTabId){
+    var first=cfg.meetingTypes.find(function(mt){return mt.active||mt.active==='true';});
+    if(first)activeTypeTabId=first.id;
+  }
   readSlotsFromDom();
   var src=cfg.meetingTypes.find(function(x){return x.id===activeTypeTabId;});
-  if(!src){toast('Nenhum tipo ativo.');return;}
-  var others=cfg.meetingTypes.filter(function(mt){return mt.id!==activeTypeTabId&&mt.active;});
+  if(!src){toast('Selecione um tipo de reunião primeiro.');return;}
+  // active pode ser booleano true ou string "true" dependendo do n8n
+  var others=cfg.meetingTypes.filter(function(mt){
+    return mt.id!==activeTypeTabId&&(mt.active===true||mt.active==='true');
+  });
   if(!others.length){toast('Não há outros tipos ativos para copiar.');return;}
 
   var overlay=document.createElement('div');
