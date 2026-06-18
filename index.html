@@ -591,7 +591,7 @@ function buildSlotRow(mtId, slot, idx){
   [1,2,3,4,5,6,0].forEach(function(d){
     var o=document.createElement('option');
     o.value=d;o.textContent=DOWNAMES[d];
-    if(slot.day===d)o.selected=true;
+    if(slot.day===d||+slot.day===d)o.selected=true;
     sel.appendChild(o);
   });
 
@@ -646,7 +646,7 @@ function readSlotsFromDom(){
   if(!mt)return;
   mt.slots=[];
   rows.forEach(function(row){
-    var dow=+row.querySelector('.slot-dow').value;
+    var dow=parseInt(row.querySelector('.slot-dow').value,10);
     var time=row.querySelector('.slot-time').value;
     if(time)mt.slots.push({day:dow,time:time});
   });
@@ -741,14 +741,27 @@ async function pushConfig(){
 // O HTML baixado sempre busca a config do n8n no loadCfg().
 // Edite pelo admin e salve — a página publicada atualiza automaticamente.
 function baixarHtml(){
-  var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  // Garante que os slots do tipo ativo estão no cfg antes de baixar
+  readSlotsFromDom();
+
+  // Serializa o cfg atual e injeta no HTML para que a versão baixada tenha os dados embutidos
+  var cfgJson = JSON.stringify(cfg);
+  var source = document.documentElement.outerHTML;
+
+  // Substitui o bloco "var cfg = {...};" pelo cfg atual
+  var updated = source.replace(
+    /var cfg\s*=\s*\{[\s\S]*?\};\s*\n\s*var availDays/,
+    'var cfg = ' + cfgJson + ';\nvar availDays'
+  );
+
+  var html = '<!DOCTYPE html>\n' + updated;
   var blob = new Blob([html], {type:'text/html;charset=utf-8'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'index.html';
   a.click();
   URL.revokeObjectURL(a.href);
-  toast('\u2705 index.html baixado! Config sempre via n8n.');
+  toast('\u2705 index.html baixado com config atual!');
 }
 
 // ── PÚBLICO: HERO ───────────────────────
