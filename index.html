@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agendamentos – Davi | ClipEscola</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Nunito,sans-serif;background:#f0f2f7;min-height:100vh}
+.hd{display:none!important}
+
+.hdr{background:#22367b;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:relative}
+.hdr img{height:36px;object-fit:contain}
+.badge{background:rgba(255,202,38,.15);border:1px solid rgba(255,202,38,.4);color:#ffca26;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+#admin-gear{position:absolute;right:12px;bottom:6px;font-size:11px;color:rgba(255,255,255,.2);cursor:pointer;user-select:none;display:block}
+
+.hero{background:linear-gradient(135deg,#22367b 0%,#1a2d6b 100%);padding:48px 32px 56px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,202,38,.07);top:-80px;right:-60px}
+.hero-tag{display:inline-block;background:rgba(255,202,38,.15);border:1px solid rgba(255,202,38,.35);color:#ffca26;font-size:12px;font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
+.hero h1{color:#fff;font-size:28px;font-weight:800;margin-bottom:4px}
+.hero .hero-sub{color:rgba(255,255,255,.6);font-size:14px;margin-bottom:10px}
+.hero p{color:rgba(255,255,255,.75);font-size:15px;max-width:480px;margin:0 auto 20px}
+.hero-meta{display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:8px 20px;color:#fff;font-size:13px;font-weight:700}
+.hero-steps{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:20px}
+.hero-step{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:7px 16px;color:rgba(255,255,255,.85);font-size:12px;font-weight:700}
+.hs-n{background:#ffca26;color:#22367b;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+
+.wrap{max-width:700px;margin:0 auto;padding:28px 16px}
+.card{background:#fff;border-radius:12px;padding:22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.ttl{font-size:15px;font-weight:800;color:#22367b;margin-bottom:14px}
+
+.tc{display:flex;align-items:center;padding:14px 16px;border-radius:10px;margin-bottom:8px;border:2px solid #e5e7eb;cursor:pointer;user-select:none;transition:all .15s}
+.tc:hover{border-color:#22367b;background:#eff6ff}
+.tc.sel{border-color:#22367b;background:#eff6ff}
+.tc .tn{font-weight:700;font-size:14px;color:#374151}
+.tc .td{font-size:12px;color:#6b7280;margin-left:8px}
+.tc.sel .tn{color:#22367b}
+.tc-desc{font-size:12px;color:#6b7280;margin-top:4px;line-height:1.5}
+.tc.sel .tc-desc{color:#4b6cb7}
+
+label{font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px}
+input,select,textarea{width:100%;padding:9px 12px;border:1.5px solid #d1d5db;border-radius:8px;font-size:14px;font-family:inherit;outline:none;color:#111827;background:#fff}
+input:focus,select:focus,textarea:focus{border-color:#22367b}
+input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
+
+.btn{padding:11px 22px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:14px;font-family:inherit;background:#22367b;color:#fff;transition:opacity .15s}
+.btn:hover{opacity:.88}.btn:disabled{opacity:.4;cursor:default}
+.btn-outline{padding:10px 20px;border-radius:8px;border:1.5px solid #22367b;background:#fff;cursor:pointer;font-weight:700;font-size:14px;font-family:inherit;color:#22367b;transition:all .15s}
+.btn-outline:hover{background:#eff6ff}
+.btn-dl{padding:10px 20px;border-radius:8px;border:1.5px solid #374151;background:#fff;cursor:pointer;font-weight:700;font-size:14px;font-family:inherit;color:#374151;transition:all .15s}
+.btn-dl:hover{background:#f3f4f6}
+.back{padding:10px 20px;border-radius:8px;border:1px solid #e5e7eb;background:#f9fafb;cursor:pointer;font-weight:700;font-size:14px;font-family:inherit;color:#6b7280}
+
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cc{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:13px;font-weight:600;cursor:default;border:2px solid transparent;user-select:none}
+.av{background:#f0fdf4;color:#166534;cursor:pointer;font-weight:700}.av:hover{background:#dcfce7}
+.sl{background:#22367b!important;color:#fff!important;border-color:#22367b!important}
+.em{color:#d1d5db}
+.cnav{display:flex;gap:6px;align-items:center}
+.cnav button{padding:5px 10px;border-radius:6px;border:1px solid #e5e7eb;background:#f9fafb;cursor:pointer;font-family:inherit;font-size:14px}
+.tz-note{font-size:11px;font-weight:700;background:#fef9c3;border:1px solid #fde047;color:#713f12;padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:10px}
+
+.ts{padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;background:#f0f9ff;color:#0369a1;border:2px solid #bae6fd;font-family:inherit;user-select:none;display:inline-block;margin:4px}
+.ts.sel{background:#22367b;color:#fff;border-color:#22367b}
+
+.loading{text-align:center;padding:32px;color:#6b7280;font-size:14px}
+.info-bar{background:#eff6ff;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:13px;color:#22367b;font-weight:600}
+.frow{display:flex;flex-direction:column;gap:12px}
+.ferr{color:#dc2626;font-size:13px;margin-top:10px;display:none}
+.succ-box{background:#ecfdf5;border:2px solid #6ee7b7;border-radius:12px;padding:32px;text-align:center}
+.meet-box{margin-top:14px;background:#eff6ff;border-radius:8px;padding:12px 14px}
+.meet-ttl{font-weight:800;color:#22367b;font-size:13px;margin-bottom:8px}
+.meet-row{display:flex;align-items:center;gap:8px}
+.meet-link{flex:1;word-break:break-all;color:#1d4ed8;font-size:13px}
+.copy-btn{flex-shrink:0;padding:6px 14px;border-radius:6px;border:1.5px solid #d3e2f2;background:#fff;color:#22367b;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit}
+
+/* Admin tabs */
+.adm-wrap{max-width:860px;margin:0 auto;padding:24px 16px}
+.adm-header{background:#fff;border-radius:12px;padding:16px 20px;margin-bottom:4px;box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.adm-header-info{font-size:14px;font-weight:700;color:#22367b}
+.adm-header-info span{color:#6b7280;font-weight:600;font-size:13px;margin-left:6px}
+.adm-status{display:inline-block;background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.adm-status.inactive{background:#fee2e2;color:#dc2626}
+
+.tab-nav{display:flex;border-bottom:2px solid #e5e7eb;margin-bottom:0;background:#fff;border-radius:12px 12px 0 0;padding:0 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow-x:auto}
+.tab-btn{padding:14px 18px;font-size:13px;font-weight:700;color:#6b7280;background:none;border:none;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;font-family:inherit;white-space:nowrap;transition:color .15s}
+.tab-btn:hover{color:#22367b}
+.tab-btn.active{color:#22367b;border-bottom-color:#22367b}
+
+.tab-panel{background:#fff;border-radius:0 0 12px 12px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.08);display:none}
+.tab-panel.active{display:block}
+
+.section-ttl{font-size:14px;font-weight:800;color:#22367b;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #f3f4f6}
+
+/* Horários por tipo */
+.type-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.type-tab{padding:7px 16px;border-radius:8px;border:1.5px solid #e5e7eb;background:#f9fafb;font-size:13px;font-weight:700;color:#6b7280;cursor:pointer;font-family:inherit;transition:all .15s}
+.type-tab:hover{border-color:#22367b;color:#22367b}
+.type-tab.active{background:#22367b;color:#fff;border-color:#22367b}
+
+.slot-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.slot-row select{width:130px;flex-shrink:0}
+.slot-row input[type=time]{width:110px;flex-shrink:0}
+.slot-row .until{font-size:12px;color:#6b7280;font-weight:700;white-space:nowrap}
+.slot-row .btn-rm{padding:6px 12px;border-radius:7px;border:none;background:#fee2e2;color:#dc2626;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+
+/* Tipos de reunião */
+.mt-row{border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:10px;background:#fafafa}
+.mt-fields{display:grid;grid-template-columns:1fr 130px 50px auto;gap:10px;align-items:center}
+.mt-preview{font-size:11px;color:#6b7280;margin-top:6px}
+.mt-preview strong{color:#22367b}
+
+/* Login */
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 64px);padding:24px}
+.login-box{background:#fff;border-radius:14px;padding:32px;width:100%;max-width:340px;box-shadow:0 4px 20px rgba(0,0,0,.1);text-align:center}
+
+.toast{position:fixed;bottom:20px;right:20px;background:#1e293b;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:700;z-index:300;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.adm-msg-bar{border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;margin-top:12px;display:none}
+.adm-msg-bar.ok{background:#ecfdf5;color:#057a55;border:1px solid #6ee7b7}
+.adm-msg-bar.err{background:#fef2f2;color:#dc2626;border:1px solid #fca5a5}
+
+@media(max-width:600px){
+  .hero{padding:32px 16px 44px}
+  .tab-panel,.card{padding:14px}
+  .mt-fields{grid-template-columns:1fr 90px 44px auto}
+  .slot-row select{width:100px}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <img src="https://i.imgur.com/IVPOWqc.png" alt="ClipEscola" onerror="this.style.display='none'" style="height:36px;object-fit:contain">
+  <div class="badge" id="hdr-badge">Retaguarda</div>
+  <span id="admin-gear" onclick="goAdmin()" title="Retaguarda" style="visibility: hidden;">⚙</span>
+</div>
+
+<!-- ══════════════════════════ PÚBLICO ══════════════════════════ -->
+<div id="view-public" class="hd">
+  <div class="hero" id="hero-area">
+    <div class="hero-tag">Agendamentos ClipEscola</div>
+    <h1 id="hero-name">Davi Morais</h1>
+    <div class="hero-sub" id="hero-title" style="display: block;">Customer Success Manager</div>
+    <p>Agende agora sua próxima reunião.</p>
+    <div class="hero-meta" id="hero-meta">🌎 Horário de Brasília</div>
+    <div class="hero-steps">
+      <div class="hero-step"><span class="hs-n">1</span><span>Escolha o tipo de reunião</span></div>
+      <div class="hero-step"><span class="hs-n">2</span><span>Selecione data e horário</span></div>
+      <div class="hero-step"><span class="hs-n">3</span><span>Preencha seus dados e confirme</span></div>
+    </div>
+  </div>
+  <div class="wrap">
+
+    <!-- Step 0: Tipo de reunião -->
+    <div id="s0" class="card">
+      <div class="ttl">Qual o tipo de reunião?</div>
+      <div id="type-list"><div class="tc" data-id="mt1"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Treinamento ClipEscola</span><span class="td">🕐 2 horas</span></div><div class="tc-desc">Para novas escolas, que ainda não utilizam a plataforma e aplicativo ClipEscola. Treinamento completo!</div></div></div><div class="tc" data-id="mt2"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Expansão de Uso</span><span class="td">🕐 2 horas</span></div><div class="tc-desc">Para escolas que estão realizando a implantação do ClipEscola e desejam expandir o uso.</div></div></div><div class="tc" data-id="idmqib5jdsqa"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Módulos Extras</span><span class="td">🕐 1 hora</span></div><div class="tc-desc">Para configurações e treinamentos de módulos extras (escolas que já usam a agenda).</div></div></div><div class="tc" data-id="idmqib8ve7rm"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Validação de Integrações</span><span class="td">🕐 1 hora</span></div><div class="tc-desc">Integração está pronta, reunião para realizar a validação e liberação da integração.</div></div></div><div class="tc" data-id="idmqib9vfuh8"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Alinhamentos</span><span class="td">🕐 1 hora</span></div><div class="tc-desc">Para diversos alinhamentos, organização de projetos, cronogramas, estratégias...</div></div></div><div class="tc" data-id="idmqiban1ofz"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Assistência</span><span class="td">🕐 1 hora</span></div><div class="tc-desc">Para tirar dúvidas, questões de usabilidade, recursos extras e configurações.</div></div></div></div>
+      <div id="no-types" class="hd" style="color:#6b7280;font-size:14px;padding:12px 0">Nenhum tipo de reunião configurado.</div>
+      <button class="btn" id="btn0" disabled="" style="margin-top:12px">Próximo →</button>
+    </div>
+
+    <!-- Step 1: Calendário -->
+    <div id="s1" class="card hd">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div class="ttl" style="margin:0">Escolha a data e horário</div>
+        <div class="cnav">
+          <button id="prev-m">‹</button>
+          <span id="cal-lbl" style="font-size:13px;font-weight:700;min-width:110px;text-align:center"></span>
+          <button id="next-m">›</button>
+        </div>
+      </div>
+      <div class="tz-note">🌎 Horário de Brasília (GMT-3)</div>
+      <div id="cal-wrap"><div class="loading">⏳ Verificando disponibilidade...</div></div>
+      <div id="tw" class="hd" style="margin-top:16px">
+        <div id="tl" style="font-size:13px;font-weight:700;color:#6b7280;margin-bottom:8px"></div>
+        <div id="times" style="display:flex;flex-wrap:wrap;gap:4px"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:16px">
+        <button class="back" id="back1">← Voltar</button>
+        <button class="btn" id="btn1" disabled="">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Dados -->
+    <div id="s2" class="card hd">
+      <div class="ttl">Preencha seus dados</div>
+      <div class="info-bar" id="ibar"></div>
+      <div class="frow">
+        <div><label>Nome da Escola *</label><input id="fi-school" placeholder="Ex: Colégio São Paulo"></div>
+        <div><label>Responsável *</label><input id="fi-contact" placeholder="Ex: João Silva"></div>
+        <div><label>E-mail *</label><input id="fi-email" type="email" placeholder="joao@escola.com.br"></div>
+        <div><label>Telefone / WhatsApp *</label><input id="fi-phone" placeholder="(48) 99999-0000"></div>
+        <div><label>Outros participantes (opcional)</label><input id="fi-guests" placeholder="e-mails separados por vírgula"></div>
+      </div>
+      <div id="ferr" class="ferr">Preencha todos os campos obrigatórios.</div>
+      <div style="display:flex;gap:10px;margin-top:16px">
+        <button class="back" id="back2">← Voltar</button>
+        <button class="btn" id="btn2">Confirmar agendamento</button>
+      </div>
+    </div>
+
+    <!-- Sucesso -->
+    <div id="succ" class="succ-box hd">
+      <div style="font-size:44px;margin-bottom:10px">✅</div>
+      <div style="font-size:18px;font-weight:800;color:#057a55;margin-bottom:6px">Reunião agendada com sucesso!</div>
+      <div id="sd" style="color:#374151;font-size:14px;line-height:1.8;margin-bottom:6px"></div>
+      <p style="color:#6b7280;font-size:13px">Um convite foi enviado para o seu e-mail.</p>
+      <button class="btn" style="margin-top:16px" id="succ-btn">Novo agendamento</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ ADMIN ══════════════════════════ -->
+<div id="view-admin" class="">
+
+  <!-- Login -->
+  <div class="login-wrap hd" id="adm-login">
+    <div class="login-box">
+      <div style="font-size:36px;margin-bottom:10px">🔐</div>
+      <div style="font-size:17px;font-weight:800;color:#22367b;margin-bottom:4px">Retaguarda</div>
+      <div style="font-size:13px;color:#6b7280;margin-bottom:20px">Davi – ClipEscola</div>
+      <input type="password" id="adm-pw" placeholder="Senha" style="margin-bottom:10px" autocomplete="off">
+      <button class="btn" style="width:100%" onclick="checkPw()">Entrar</button>
+      <div id="pw-err" style="color:#dc2626;font-size:12px;margin-top:8px;display:none">Senha incorreta.</div>
+    </div>
+  </div>
+
+  <!-- Painel -->
+  <div id="adm-panel" class="">
+    <div class="adm-wrap">
+
+      <!-- Header info -->
+      <div class="adm-header">
+        <div>
+          <div class="adm-header-info" id="adm-hdr-name">Configurações — <span id="adm-hdr-sub">Davi Morais · Customer Success Manager</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="adm-status" id="adm-status-badge">● Ativo</span>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tab-nav">
+        <button class="tab-btn" onclick="switchTab('dados')" id="tab-dados">👤 Dados do CSM</button>
+        <button class="tab-btn" onclick="switchTab('horarios')" id="tab-horarios">📅 Horários</button>
+        <button class="tab-btn" onclick="switchTab('tipos')" id="tab-tipos">🎯 Tipos de Reunião</button>
+        <button class="tab-btn active" onclick="switchTab('config')" id="tab-config">⚙️ Configurações</button>
+      </div>
+
+      <!-- Aba: Dados do CSM -->
+      <div class="tab-panel" id="panel-dados">
+        <div class="section-ttl">● Informações do CSM</div>
+        <div class="frow">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div><label>Nome</label><input id="d-name" placeholder="Ex: Davi"></div>
+            <div><label>Cargo</label><input id="d-title" placeholder="Ex: Customer Success Manager"></div>
+          </div>
+          <div><label>E-mail</label><input id="d-email" type="email" placeholder="davimorais.clipescola@gmail.com"></div>
+          <div>
+            <label>Link ICS Público da Agenda Google</label>
+            <input id="d-ics" placeholder="https://calendar.google.com/calendar/ical/...">
+            <div style="font-size:11px;color:#6b7280;margin-top:4px">Google Agenda → Configurações → Integrar agenda → URL pública ICS</div>
+          </div>
+          <div>
+            <label>Status</label>
+            <select id="d-status">
+              <option value="active">✅ Ativo</option>
+              <option value="inactive">🔴 Inativo</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+          <button class="btn" onclick="salvarDados()">💾 Salvar configurações</button>
+          <button class="btn-dl" onclick="baixarHtml()">📥 Baixar index.html</button>
+        </div>
+        <div class="adm-msg-bar" id="msg-dados"></div>
+      </div>
+
+      <!-- Aba: Horários -->
+      <div class="tab-panel" id="panel-horarios">
+        <div class="section-ttl">📅 Horários Disponíveis</div>
+        <div style="font-size:13px;color:#6b7280;margin-bottom:16px">Novos tipos aparecem automaticamente nesta aba ao serem criados.</div>
+        <div id="type-tabs-horarios" class="type-tabs"><button class="type-tab active">Treinamento ClipEscola (2 horas)</button><button class="type-tab">Expansão de Uso (2 horas)</button><button class="type-tab">Módulos Extras (1 hora)</button><button class="type-tab">Validação de Integrações (1 hora)</button><button class="type-tab">Alinhamentos (1 hora)</button><button class="type-tab">Assistência (1 hora)</button></div>
+        <div id="slots-editor"><div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:12px">Treinamento ClipEscola<span style="color:#6b7280;font-weight:600;font-size:12px;margin-left:8px">Duração: 120 min</span></div><div class="slot-row" data-mtid="mt1" data-idx="0"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 11:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="1"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 16:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="2"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 16:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="3"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 11:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="4"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 16:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="5"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 11:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="6"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 16:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="7"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 11:30</span><button class="btn-rm">Remover</button></div></div>
+        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+          <button class="btn-outline" onclick="addSlotRow()">+ Horário</button>
+          <button class="btn" onclick="salvarHorarios()">💾 Salvar</button>
+          <button class="btn-outline" onclick="copiarParaTodos()" style="background:#fef9c3;border-color:#fde047;color:#713f12">📋 Copiar para...</button>
+        </div>
+        <div class="adm-msg-bar" id="msg-horarios"></div>
+      </div>
+
+      <!-- Aba: Tipos de Reunião -->
+      <div class="tab-panel" id="panel-tipos">
+        <div class="section-ttl">🎯 Tipos de Reunião</div>
+        <div style="font-size:13px;color:#6b7280;margin-bottom:16px">Novos tipos aparecem automaticamente na aba Horários.</div>
+        <div id="mt-list"><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="mt1" value="Treinamento ClipEscola" oninput="updateMtPreview('mt1')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="mt1" type="number" min="15" max="480" step="15" value="120" oninput="updateMtPreview('mt1')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="mt1" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('mt1')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="mt1" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para novas escolas, que ainda não utilizam a plataforma e aplicativo ClipEscola. Treinamento completo!</textarea></div><div class="mt-preview" id="mtp-mt1">Preview: <strong>Treinamento ClipEscola (2h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="mt2" value="Expansão de Uso" oninput="updateMtPreview('mt2')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="mt2" type="number" min="15" max="480" step="15" value="120" oninput="updateMtPreview('mt2')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="mt2" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('mt2')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="mt2" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para escolas que estão realizando a implantação do ClipEscola e desejam expandir o uso.</textarea></div><div class="mt-preview" id="mtp-mt2">Preview: <strong>Expansão de Uso (2h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="idmqib5jdsqa" value="Módulos Extras" oninput="updateMtPreview('idmqib5jdsqa')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="idmqib5jdsqa" type="number" min="15" max="480" step="15" value="60" oninput="updateMtPreview('idmqib5jdsqa')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="idmqib5jdsqa" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('idmqib5jdsqa')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="idmqib5jdsqa" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para configurações e treinamentos de módulos extras (escolas que já usam a agenda).</textarea></div><div class="mt-preview" id="mtp-idmqib5jdsqa">Preview: <strong>Módulos Extras (1h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="idmqib8ve7rm" value="Validação de Integrações" oninput="updateMtPreview('idmqib8ve7rm')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="idmqib8ve7rm" type="number" min="15" max="480" step="15" value="60" oninput="updateMtPreview('idmqib8ve7rm')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="idmqib8ve7rm" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('idmqib8ve7rm')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="idmqib8ve7rm" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Integração está pronta, reunião para realizar a validação e liberação da integração.</textarea></div><div class="mt-preview" id="mtp-idmqib8ve7rm">Preview: <strong>Validação de Integrações (1h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="idmqib9vfuh8" value="Alinhamentos" oninput="updateMtPreview('idmqib9vfuh8')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="idmqib9vfuh8" type="number" min="15" max="480" step="15" value="60" oninput="updateMtPreview('idmqib9vfuh8')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="idmqib9vfuh8" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('idmqib9vfuh8')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="idmqib9vfuh8" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para diversos alinhamentos, organização de projetos, cronogramas, estratégias...</textarea></div><div class="mt-preview" id="mtp-idmqib9vfuh8">Preview: <strong>Alinhamentos (1h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="idmqiban1ofz" value="Assistência" oninput="updateMtPreview('idmqiban1ofz')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="idmqiban1ofz" type="number" min="15" max="480" step="15" value="60" oninput="updateMtPreview('idmqiban1ofz')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="idmqiban1ofz" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('idmqiban1ofz')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="idmqiban1ofz" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para tirar dúvidas, questões de usabilidade, recursos extras e configurações.</textarea></div><div class="mt-preview" id="mtp-idmqiban1ofz">Preview: <strong>Assistência (1h)</strong></div></div></div>
+        <div style="display:flex;gap:10px;margin-top:16px">
+          <button class="btn-outline" onclick="addMeetingType()">+ Adicionar tipo</button>
+          <button class="btn" onclick="salvarTipos()">💾 Salvar</button>
+        </div>
+        <div class="adm-msg-bar" id="msg-tipos"></div>
+      </div>
+
+      <!-- Aba: Configurações -->
+      <div class="tab-panel active" id="panel-config">
+        <div class="section-ttl">● Configurações do sistema</div>
+        <div class="frow">
+          <div><label>Webhook Verificar</label><input id="c-wv" placeholder="https://n8n.clipescola.com.br/webhook/verificar-davi"></div>
+          <div><label>Webhook Agendar</label><input id="c-wa" placeholder="https://n8n.clipescola.com.br/webhook/agendar-davi"></div>
+          <div><label>Calendar ID</label><input id="c-calid" placeholder="davimorais.clipescola@gmail.com"></div>
+          <div><label>URL da Página (para reagendamento)</label><input id="c-pageurl" placeholder="https://clipescola-gp.github.io/agendamentos-davi/"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div><label>SLA Mínimo (horas)</label><input id="c-sla" type="number" min="0" max="168" value="48"></div>
+            <div><label>Senha Admin</label><input id="c-pw" type="text" placeholder="clip2025"></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+          <button class="btn" onclick="salvarConfig()">💾 Salvar configurações</button>
+          <button class="btn-dl" onclick="baixarHtml()">📥 Baixar index.html</button>
+        </div>
+        <div class="adm-msg-bar" id="msg-config"></div>
+      </div>
+
+      <div style="margin-top:8px">
+        <button class="back" onclick="goPublic()">← Voltar ao site</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══ ENDPOINTS (configurados via admin → aba Configurações) ═══
+var WV      = 'https://n8n.clipescola.com.br/webhook/verificar-davi';
+var WA      = 'https://n8n.clipescola.com.br/webhook/agendar-davi';
+var WC_GET  = 'https://n8n.clipescola.com.br/webhook/config-davi';
+var WC_SAVE = 'https://n8n.clipescola.com.br/webhook/config-davi-save';
+var ADMIN_PW = 'clip2025';
+// ══════════════════════════════════════════════════════════════
+
+// Padrão 2h: Seg 09:30, Seg 14:30, Ter 14:30, Qua 09:30, Qua 14:30, Qui 09:30, Qui 14:30, Sex 09:30
+var SLOTS_2H = [
+  {day:1,time:'09:30'},{day:1,time:'14:30'},
+  {day:2,time:'14:30'},
+  {day:3,time:'09:30'},{day:3,time:'14:30'},
+  {day:4,time:'09:30'},{day:4,time:'14:30'},
+  {day:5,time:'09:30'}
+];
+// Padrão 1h: Seg 09:00, Seg 11:00, Seg 14:00, Seg 15:30, Ter 14:00, Ter 15:30,
+//            Qua 09:00, Qua 11:00, Qua 14:00, Qua 15:30, Qui 09:00, Qui 11:00,
+//            Qui 14:00, Qui 15:30, Sex 09:00, Sex 11:00
+var SLOTS_1H = [
+  {day:1,time:'09:00'},{day:1,time:'11:00'},{day:1,time:'14:00'},{day:1,time:'15:30'},
+  {day:2,time:'14:00'},{day:2,time:'15:30'},
+  {day:3,time:'09:00'},{day:3,time:'11:00'},{day:3,time:'14:00'},{day:3,time:'15:30'},
+  {day:4,time:'09:00'},{day:4,time:'11:00'},{day:4,time:'14:00'},{day:4,time:'15:30'},
+  {day:5,time:'09:00'},{day:5,time:'11:00'}
+];
+
+var cfg = {
+  csm:          { name:'Davi', title:'Customer Success Manager', email:'davimorais.clipescola@gmail.com', icsUrl:'https://calendar.google.com/calendar/ical/davimorais.clipescola%40gmail.com/public/basic.ics', status:'active' },
+  system:       { webhookVerificar: WV, webhookAgendar: WA, calendarId:'davimorais.clipescola@gmail.com', sheetId:'', meetingTitle:'Reunião ClipEscola', slaHours:48, pageUrl:'https://clipescola-gp.github.io/agendamentos-davi/' },
+  meetingTypes: [
+    { id:'mt1',          name:'Treinamento ClipEscola',    duration:120, active:true, desc:'Para novas escolas, que ainda não utilizam a plataforma e aplicativo ClipEscola. Treinamento completo!',                                                   slots: JSON.parse(JSON.stringify(SLOTS_2H)) },
+    { id:'mt2',          name:'Expansão de Uso',           duration:120, active:true, desc:'Para escolas que estão realizando a implantação do ClipEscola e desejam expandir o uso.',                                                                  slots: JSON.parse(JSON.stringify(SLOTS_2H)) },
+    { id:'idmqib5jdsqa', name:'Módulos Extras',            duration:60,  active:true, desc:'Para configurações e treinamentos de módulos extras (escolas que já usam a agenda).',                                                                      slots: JSON.parse(JSON.stringify(SLOTS_1H)) },
+    { id:'idmqib8ve7rm', name:'Validação de Integrações',  duration:60,  active:true, desc:'Integração está pronta, reunião para realizar a validação e liberação da integração.',                                                                     slots: JSON.parse(JSON.stringify(SLOTS_1H)) },
+    { id:'idmqib9vfuh8', name:'Alinhamentos',              duration:60,  active:true, desc:'Para diversos alinhamentos, organização de projetos, cronogramas, estratégias...',                                                                         slots: JSON.parse(JSON.stringify(SLOTS_1H)) },
+    { id:'idmqiban1ofz', name:'Assistência',               duration:60,  active:true, desc:'Para tirar dúvidas, questões de usabilidade, recursos extras e configurações.',                                                                            slots: JSON.parse(JSON.stringify(SLOTS_1H)) }
+  ]
+};
+
+var availDays = {};
+var cy = new Date().getFullYear(), cm = new Date().getMonth();
+var selDate='', selTime='', selTypeId='', selTypeName='', selTypeDur=60;
+var activeTypeTabId = '';
+var _submitting = false;
+
+var MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+var DS     = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+var DL     = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+var DOWMAP = {0:'Dom',1:'Seg',2:'Ter',3:'Qua',4:'Qui',5:'Sex',6:'Sáb'};
+var DOWNAMES = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+
+function pad(n){return ('0'+n).slice(-2);}
+function addMin(t,m){var p=t.split(':'),v=+p[0]*60+ +p[1]+m;return pad(Math.floor(v/60))+':'+pad(v%60);}
+function uid(){return 'id'+Date.now().toString(36)+Math.random().toString(36).slice(2,4);}
+function toast(msg){var el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(function(){el.classList.remove('show');},2500);}
+function showEl(id){document.getElementById(id).classList.remove('hd');}
+function hideEl(id){document.getElementById(id).classList.add('hd');}
+function showPub(id){['s0','s1','s2','succ'].forEach(function(x){document.getElementById(x).classList.add('hd');});document.getElementById(id).classList.remove('hd');}
+
+function showMsg(id, msg, isOk){
+  var el=document.getElementById(id);
+  el.textContent=msg;
+  el.className='adm-msg-bar '+(isOk?'ok':'err');
+  el.style.display='block';
+  setTimeout(function(){el.style.display='none';},4000);
+}
+
+// ── CONFIG ──────────────────────────────
+async function loadCfg(){
+  try{
+    var r=await fetch(WC_GET,{cache:'no-store'});
+    if(r.ok){var d=await r.json();if(d&&d.meetingTypes){cfg=d;updateEndpoints();return;}}
+  }catch(e){console.warn('config n8n indisponível:',e);}
+}
+
+function updateEndpoints(){
+  if(cfg.system){
+    if(cfg.system.webhookVerificar) WV=cfg.system.webhookVerificar;
+    if(cfg.system.webhookAgendar)   WA=cfg.system.webhookAgendar;
+  }
+}
+
+// ── ROUTING ────────────────────────────
+function goAdmin(){
+  hideEl('view-public');showEl('view-admin');
+  document.getElementById('hdr-badge').textContent='Retaguarda';
+  document.getElementById('admin-gear').style.visibility='hidden';
+}
+function goPublic(){
+  hideEl('view-admin');showEl('view-public');
+  document.getElementById('hdr-badge').textContent='CS – '+(cfg.csm.name||'Davi');
+  document.getElementById('admin-gear').style.visibility='visible';
+  location.hash='';
+}
+
+// ── AUTH ────────────────────────────────
+function checkPw(){
+  var pw=document.getElementById('adm-pw').value;
+  var stored=cfg.system&&cfg.system.adminPw?cfg.system.adminPw:ADMIN_PW;
+  if(pw===stored){
+    hideEl('adm-login');showEl('adm-panel');
+    renderAdminAll();
+  }else{
+    document.getElementById('pw-err').style.display='block';
+  }
+}
+
+// ── TABS ────────────────────────────────
+function switchTab(t){
+  ['dados','horarios','tipos','config'].forEach(function(id){
+    document.getElementById('panel-'+id).classList.remove('active');
+    document.getElementById('tab-'+id).classList.remove('active');
+  });
+  document.getElementById('panel-'+t).classList.add('active');
+  document.getElementById('tab-'+t).classList.add('active');
+}
+
+// ── RENDER ADMIN ────────────────────────
+function renderAdminAll(){
+  // Dados
+  document.getElementById('d-name').value    = cfg.csm.name    || '';
+  document.getElementById('d-title').value   = cfg.csm.title   || '';
+  document.getElementById('d-email').value   = cfg.csm.email   || '';
+  document.getElementById('d-ics').value     = cfg.csm.icsUrl  || '';
+  document.getElementById('d-status').value  = cfg.csm.status  || 'active';
+  // header
+  document.getElementById('adm-hdr-sub').textContent = (cfg.csm.name||'Davi') + (cfg.csm.title?' · '+cfg.csm.title:'');
+  var badge = document.getElementById('adm-status-badge');
+  badge.textContent = cfg.csm.status==='inactive'?'● Inativo':'● Ativo';
+  badge.className   = 'adm-status'+(cfg.csm.status==='inactive'?' inactive':'');
+
+  // Config
+  var s = cfg.system||{};
+  document.getElementById('c-wv').value      = s.webhookVerificar||WV;
+  document.getElementById('c-wa').value      = s.webhookAgendar  ||WA;
+  document.getElementById('c-calid').value   = s.calendarId      ||cfg.csm.email||'';
+  document.getElementById('c-pageurl').value = s.pageUrl         ||'';
+  document.getElementById('c-sla').value     = s.slaHours        ||48;
+  document.getElementById('c-pw').value      = s.adminPw         ||ADMIN_PW;
+
+  // Tipos
+  renderTipos();
+  // Horários
+  renderTypeTabsHorarios();
+}
+
+// ── TIPOS DE REUNIÃO ────────────────────
+function renderTipos(){
+  var el=document.getElementById('mt-list');
+  el.innerHTML='';
+  (cfg.meetingTypes||[]).forEach(function(mt,i){
+    var row=document.createElement('div');
+    row.className='mt-row';
+    var durMin=mt.duration||60;
+    var durLabel=durMin>=60?(durMin/60)+'h':'';
+    if(durMin%60!==0||durMin<60)durLabel=durMin+' min';
+    row.innerHTML=
+      '<div class="mt-fields">'
+        +'<div><label>Nome</label><input class="mt-name" data-id="'+mt.id+'" value="'+escH(mt.name)+'" oninput="updateMtPreview(\''+mt.id+'\')" placeholder="Ex: Treinamento"></div>'
+        +'<div><label>Duração (min)</label><input class="mt-dur" data-id="'+mt.id+'" type="number" min="15" max="480" step="15" value="'+durMin+'" oninput="updateMtPreview(\''+mt.id+'\')"></div>'
+        +'<div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="'+mt.id+'" type="checkbox"'+(mt.active?' checked':'')+'></div>'
+        +'<div style="padding-top:20px"><button class="btn-rm" onclick="removeMt(\''+mt.id+'\')">Remover</button></div>'
+      +'</div>'
+      +'<div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style=\"font-weight:600;color:#9ca3af\">(aparece na página para ajudar o cliente a escolher)</span></label>'
+        +'<textarea class="mt-desc" data-id="'+mt.id+'" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">'+escH(mt.desc||'')+'</textarea></div>'
+      +'<div class="mt-preview" id="mtp-'+mt.id+'">Preview: <strong>'+escH(mt.name)+(durLabel?' ('+durLabel+')':'')+'</strong></div>';
+    el.appendChild(row);
+  });
+}
+
+function updateMtPreview(id){
+  var name=document.querySelector('.mt-name[data-id="'+id+'"]')?.value||'';
+  var dur=+document.querySelector('.mt-dur[data-id="'+id+'"]')?.value||60;
+  var label=dur>=60&&dur%60===0?(dur/60)+'h':dur+' min';
+  var el=document.getElementById('mtp-'+id);
+  if(el)el.innerHTML='Preview: <strong>'+escH(name)+' ('+label+')'+'</strong>';
+}
+
+function addMeetingType(){
+  cfg.meetingTypes.push({ id:uid(), name:'Novo tipo', duration:60, active:true, slots:[] });
+  renderTipos();
+}
+
+function removeMt(id){
+  if(!confirm('Remover este tipo de reunião? Os horários configurados serão perdidos.'))return;
+  cfg.meetingTypes=cfg.meetingTypes.filter(function(x){return x.id!==id;});
+  renderTipos();
+  renderTypeTabsHorarios();
+}
+
+function readTiposFromDom(){
+  cfg.meetingTypes.forEach(function(mt){
+    var nameEl   = document.querySelector('.mt-name[data-id="'+mt.id+'"]');
+    var durEl    = document.querySelector('.mt-dur[data-id="'+mt.id+'"]');
+    var activeEl = document.querySelector('.mt-active[data-id="'+mt.id+'"]');
+    var descEl   = document.querySelector('.mt-desc[data-id="'+mt.id+'"]');
+    if(nameEl)   mt.name     = nameEl.value.trim()||mt.name;
+    if(durEl)    mt.duration = Math.max(15,+durEl.value||60);
+    if(activeEl) mt.active   = activeEl.checked;
+    if(descEl)   mt.desc     = descEl.value.trim();
+  });
+}
+
+async function salvarTipos(){
+  readTiposFromDom();
+  renderTypeTabsHorarios();
+  var ok=await pushConfig();
+  showMsg('msg-tipos', ok?'✅ Tipos salvos com sucesso!':'⚠️ Erro ao salvar.', ok);
+}
+
+// ── HORÁRIOS ────────────────────────────
+function renderTypeTabsHorarios(){
+  var tabs=document.getElementById('type-tabs-horarios');
+  tabs.innerHTML='';
+  var active=cfg.meetingTypes.filter(function(mt){return mt.active;});
+  if(!active.length){
+    document.getElementById('slots-editor').innerHTML='<div style="color:#6b7280;font-size:14px;padding:12px 0">Nenhum tipo ativo. Crie e ative tipos na aba "Tipos de Reunião".</div>';
+    return;
+  }
+  if(!activeTypeTabId||!active.find(function(mt){return mt.id===activeTypeTabId;}))
+    activeTypeTabId=active[0].id;
+
+  active.forEach(function(mt){
+    var btn=document.createElement('button');
+    btn.className='type-tab'+(mt.id===activeTypeTabId?' active':'');
+    var dur=mt.duration;
+    var label=dur>=60&&dur%60===0?(dur/60)+(dur/60===1?' hora':' horas'):dur+' min';
+    btn.textContent=mt.name+' ('+label+')';
+    btn.onclick=function(){activeTypeTabId=mt.id;renderTypeTabsHorarios();};
+    tabs.appendChild(btn);
+  });
+  renderSlotsEditor(activeTypeTabId);
+}
+
+function renderSlotsEditor(mtId){
+  var mt=cfg.meetingTypes.find(function(x){return x.id===mtId;});
+  if(!mt){document.getElementById('slots-editor').innerHTML='';return;}
+
+  var el=document.getElementById('slots-editor');
+  el.innerHTML='<div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:12px">'+escH(mt.name)+'<span style="color:#6b7280;font-weight:600;font-size:12px;margin-left:8px">Duração: '+mt.duration+' min</span></div>';
+
+  var slots=mt.slots||[];
+  slots.forEach(function(slot,i){
+    el.appendChild(buildSlotRow(mtId, slot, i));
+  });
+}
+
+function buildSlotRow(mtId, slot, idx){
+  var div=document.createElement('div');
+  div.className='slot-row';
+  div.dataset.mtid=mtId;
+  div.dataset.idx=idx;
+
+  var sel=document.createElement('select');
+  sel.className='slot-dow';
+  [1,2,3,4,5,6,0].forEach(function(d){
+    var o=document.createElement('option');
+    o.value=d;o.textContent=DOWNAMES[d];
+    if(slot.day===d)o.selected=true;
+    sel.appendChild(o);
+  });
+
+  var inp=document.createElement('input');
+  inp.type='time';inp.className='slot-time';inp.value=slot.time||'09:00';
+
+  var until=document.createElement('span');
+  until.className='until';
+  var mt=cfg.meetingTypes.find(function(x){return x.id===mtId;});
+  var dur=mt?mt.duration:60;
+  var updateUntil=function(){until.textContent='até '+addMin(inp.value,dur);};
+  inp.addEventListener('change',updateUntil);
+  updateUntil();
+
+  var rmBtn=document.createElement('button');
+  rmBtn.className='btn-rm';rmBtn.textContent='Remover';
+  rmBtn.onclick=function(){
+    var mtt=cfg.meetingTypes.find(function(x){return x.id===mtId;});
+    if(mtt)mtt.slots.splice(idx,1);
+    renderSlotsEditor(mtId);
+    renderTypeTabsHorarios();
+  };
+
+  div.appendChild(sel);div.appendChild(inp);div.appendChild(until);div.appendChild(rmBtn);
+  return div;
+}
+
+// Ordem de exibição: Seg(1) Ter(2) Qua(3) Qui(4) Sex(5) Sáb(6) Dom(0)
+var DOW_ORDER = {1:0,2:1,3:2,4:3,5:4,6:5,0:6};
+function sortSlots(slots){
+  return slots.slice().sort(function(a,b){
+    var da=DOW_ORDER[a.day]!==undefined?DOW_ORDER[a.day]:7;
+    var db=DOW_ORDER[b.day]!==undefined?DOW_ORDER[b.day]:7;
+    if(da!==db)return da-db;
+    return a.time.localeCompare(b.time);
+  });
+}
+
+function addSlotRow(){
+  var mt=cfg.meetingTypes.find(function(x){return x.id===activeTypeTabId;});
+  if(!mt){toast('Selecione um tipo de reunião primeiro.');return;}
+  if(!mt.slots)mt.slots=[];
+  mt.slots.push({day:1,time:'09:00'});
+  mt.slots=sortSlots(mt.slots);
+  renderSlotsEditor(activeTypeTabId);
+  renderTypeTabsHorarios();
+}
+
+function readSlotsFromDom(){
+  var rows=document.querySelectorAll('#slots-editor .slot-row');
+  var mt=cfg.meetingTypes.find(function(x){return x.id===activeTypeTabId;});
+  if(!mt)return;
+  mt.slots=[];
+  rows.forEach(function(row){
+    var dow=+row.querySelector('.slot-dow').value;
+    var time=row.querySelector('.slot-time').value;
+    if(time)mt.slots.push({day:dow,time:time});
+  });
+  mt.slots=sortSlots(mt.slots);
+}
+
+function copiarParaTodos(){
+  readSlotsFromDom();
+  var src=cfg.meetingTypes.find(function(x){return x.id===activeTypeTabId;});
+  if(!src){toast('Nenhum tipo ativo.');return;}
+  var others=cfg.meetingTypes.filter(function(mt){return mt.id!==activeTypeTabId&&mt.active;});
+  if(!others.length){toast('Nenhum outro tipo ativo para copiar.');return;}
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px';
+  var box=document.createElement('div');
+  box.style.cssText='background:#fff;border-radius:14px;padding:28px;max-width:380px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.18)';
+  var html='<div style="font-size:15px;font-weight:800;color:#22367b;margin-bottom:6px">&#128203; Copiar horarios para...</div>'
+    +'<div style="font-size:13px;color:#6b7280;margin-bottom:18px">Copiar os horarios de <strong style="color:#22367b">'+escH(src.name)+'</strong> para:</div>';
+  others.forEach(function(mt){
+    html+='<label style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;border:1.5px solid #e5e7eb;margin-bottom:8px;cursor:pointer;font-size:13px;font-weight:700;color:#374151">'
+      +'<input type="checkbox" class="copy-chk" data-id="'+mt.id+'" style="width:16px;height:16px;accent-color:#22367b;flex-shrink:0"> '+escH(mt.name)+'</label>';
+  });
+  html+='<div style="display:flex;gap:8px;margin-top:18px">'
+    +'<button id="copy-modal-cancel" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid #e5e7eb;background:#f9fafb;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;color:#6b7280">Cancelar</button>'
+    +'<button id="copy-modal-ok" style="flex:1;padding:10px;border-radius:8px;border:none;background:#22367b;color:#fff;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit">Copiar</button>'
+    +'</div>';
+  box.innerHTML=html;
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+  document.getElementById('copy-modal-cancel').onclick=function(){document.body.removeChild(overlay);};
+  overlay.addEventListener('click',function(e){if(e.target===overlay)document.body.removeChild(overlay);});
+  document.getElementById('copy-modal-ok').onclick=function(){
+    var checked=[].slice.call(box.querySelectorAll('.copy-chk:checked'));
+    if(!checked.length){toast('Selecione ao menos um tipo.');return;}
+    checked.forEach(function(chk){
+      var mt=cfg.meetingTypes.find(function(x){return x.id===chk.dataset.id;});
+      if(mt)mt.slots=JSON.parse(JSON.stringify(src.slots));
+    });
+    document.body.removeChild(overlay);
+    toast('Horarios copiados para '+checked.length+' tipo(s).');
+  };
+}
+
+async function salvarHorarios(){
+  readSlotsFromDom();
+  renderSlotsEditor(activeTypeTabId);
+  var ok=await pushConfig();
+  showMsg('msg-horarios', ok?'✅ Horários salvos com sucesso!':'⚠️ Erro ao salvar.', ok);
+}
+
+// ── SALVAR DADOS ────────────────────────
+async function salvarDados(){
+  cfg.csm.name    = document.getElementById('d-name').value.trim();
+  cfg.csm.title   = document.getElementById('d-title').value.trim();
+  cfg.csm.email   = document.getElementById('d-email').value.trim();
+  cfg.csm.icsUrl  = document.getElementById('d-ics').value.trim();
+  cfg.csm.status  = document.getElementById('d-status').value;
+  var ok=await pushConfig();
+  if(ok){
+    document.getElementById('adm-hdr-sub').textContent=(cfg.csm.name||'Davi')+(cfg.csm.title?' · '+cfg.csm.title:'');
+    var badge=document.getElementById('adm-status-badge');
+    badge.textContent=cfg.csm.status==='inactive'?'● Inativo':'● Ativo';
+    badge.className='adm-status'+(cfg.csm.status==='inactive'?' inactive':'');
+    document.getElementById('hdr-badge').textContent='CS – '+(cfg.csm.name||'Davi');
+    updatePublicHero();
+  }
+  showMsg('msg-dados', ok?'✅ Dados salvos com sucesso!':'⚠️ Erro ao salvar.', ok);
+}
+
+// ── SALVAR CONFIG ───────────────────────
+async function salvarConfig(){
+  cfg.system.webhookVerificar = document.getElementById('c-wv').value.trim();
+  cfg.system.webhookAgendar   = document.getElementById('c-wa').value.trim();
+  cfg.system.calendarId       = document.getElementById('c-calid').value.trim();
+  cfg.system.pageUrl          = document.getElementById('c-pageurl').value.trim();
+  cfg.system.slaHours         = Math.max(0,+document.getElementById('c-sla').value||48);
+  cfg.system.adminPw          = document.getElementById('c-pw').value||ADMIN_PW;
+  updateEndpoints();
+  var ok=await pushConfig();
+  showMsg('msg-config', ok?'✅ Configurações salvas!':'⚠️ Erro ao salvar.', ok);
+}
+
+// ── PUSH PARA N8N ───────────────────────
+async function pushConfig(){
+  try{
+    var r=await fetch(WC_SAVE,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(cfg)});
+    return r.ok;
+  }catch(e){console.error('pushConfig erro:',e);return false;}
+}
+
+// ── BAIXAR INDEX.HTML ───────────────────
+// O HTML baixado sempre busca a config do n8n no loadCfg().
+// Edite pelo admin e salve — a página publicada atualiza automaticamente.
+function baixarHtml(){
+  var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  var blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'index.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('\u2705 index.html baixado! Config sempre via n8n.');
+}
+
+// ── PÚBLICO: HERO ───────────────────────
+function updatePublicHero(){
+  var csm=cfg.csm||{};
+  document.getElementById('hero-name').textContent  = csm.name  || 'Davi';
+  document.getElementById('hero-title').textContent = csm.title || '';
+  document.getElementById('hero-title').style.display = csm.title?'block':'none';
+  document.getElementById('hdr-badge').textContent = 'CS – '+(csm.name||'Davi');
+}
+
+// ── PÚBLICO: TIPOS DE REUNIÃO ───────────
+function renderPublicTypes(){
+  var list=document.getElementById('type-list');
+  list.innerHTML='';
+  var active=(cfg.meetingTypes||[]).filter(function(mt){return mt.active;});
+  if(!active.length){showEl('no-types');return;}
+  hideEl('no-types');
+  active.forEach(function(mt){
+    var dur=mt.duration||60;
+    var label=dur>=60&&dur%60===0?(dur/60)+(dur/60===1?' hora':' horas'):dur+' min';
+    var el=document.createElement('div');
+    el.className='tc';
+    el.dataset.id=mt.id;
+    el.innerHTML='<div style="flex:1">'
+      +'<div style="display:flex;align-items:center;gap:8px"><span class="tn">'+escH(mt.name)+'</span><span class="td">🕐 '+label+'</span></div>'
+      +(mt.desc?'<div class="tc-desc">'+escH(mt.desc)+'</div>':'')
+      +'</div>';
+    el.addEventListener('click',function(){
+      document.querySelectorAll('#type-list .tc').forEach(function(x){x.classList.remove('sel');});
+      el.classList.add('sel');
+      selTypeId  = mt.id;
+      selTypeName= mt.name;
+      selTypeDur = mt.duration||60;
+      document.getElementById('btn0').disabled=false;
+    });
+    list.appendChild(el);
+  });
+}
+
+// ── PÚBLICO: DISPONIBILIDADE ─────────────
+async function loadAvailability(){
+  document.getElementById('cal-wrap').innerHTML='<div class="loading">⏳ Verificando disponibilidade...</div>';
+  hideEl('tw');selDate='';selTime='';document.getElementById('btn1').disabled=true;
+  availDays={};
+
+  var mt=cfg.meetingTypes.find(function(x){return x.id===selTypeId;});
+  if(!mt){renderCal();return;}
+
+  var slaHours = (cfg.system&&cfg.system.slaHours!==undefined)?cfg.system.slaHours:48;
+  var wv = (cfg.system&&cfg.system.webhookVerificar)||WV;
+
+  var today=new Date();today.setHours(0,0,0,0);
+
+  for(var i=1;i<=30;i++){
+    var d=new Date(today);d.setDate(d.getDate()+i);
+    var dow=d.getDay();
+    var iso=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+    var daySlots=(mt.slots||[]).filter(function(s){return s.day===dow;});
+    if(!daySlots.length)continue;
+    try{
+      var r=await fetch(wv,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        date:        iso,
+        slots:       daySlots,
+        duration:    mt.duration,
+        slaHours:    slaHours,
+        meetingType: mt.name
+      })});
+      if(r.ok){
+        var resp=await r.json();
+        if(resp.slots&&resp.slots.length)
+          availDays[iso]=resp.slots.map(function(s){return s.time;});
+      }
+    }catch(e){console.error('Erro verificação',iso,e);}
+  }
+  renderCal();
+}
+
+function renderCal(){
+  document.getElementById('cal-lbl').textContent=MONTHS[cm].charAt(0).toUpperCase()+MONTHS[cm].slice(1)+' '+cy;
+  var first=new Date(cy,cm,1).getDay(), days=new Date(cy,cm+1,0).getDate();
+  var grid=document.createElement('div');grid.className='cal';
+  DS.forEach(function(d){var h=document.createElement('div');h.style.cssText='text-align:center;font-size:11px;font-weight:700;color:#6b7280;padding:4px 0';h.textContent=d;grid.appendChild(h);});
+  for(var i=0;i<first;i++)grid.appendChild(document.createElement('div'));
+  for(var d=1;d<=days;d++){
+    var iso=cy+'-'+pad(cm+1)+'-'+pad(d);
+    var avail=!!availDays[iso];
+    var isSel=iso===selDate;
+    var cell=document.createElement('div');
+    cell.className='cc'+(isSel?' sl':avail?' av':' em');
+    cell.textContent=d;
+    if(avail)(function(i2){cell.addEventListener('click',function(){pickDate(i2);});})(iso);
+    grid.appendChild(cell);
+  }
+  var w=document.getElementById('cal-wrap');w.innerHTML='';w.appendChild(grid);
+}
+
+function pickDate(iso){
+  selDate=iso;selTime='';document.getElementById('btn1').disabled=true;
+  renderCal();
+  var times=availDays[iso]||[];
+  showEl('tw');
+  var dt=new Date(iso+'T12:00:00');
+  document.getElementById('tl').textContent='Horários – '+DL[dt.getDay()]+', '+dt.getDate()+' de '+MONTHS[dt.getMonth()];
+  var tc=document.getElementById('times');tc.innerHTML='';
+  if(!times.length){tc.innerHTML='<span style="color:#dc2626;font-size:13px">Nenhum horário disponível. Escolha outra data.</span>';return;}
+  times.forEach(function(t){
+    var b=document.createElement('div');b.className='ts';b.dataset.time=t;
+    b.innerHTML=t+' <span style="font-size:11px;opacity:.7">até '+addMin(t,selTypeDur)+'</span>';
+    b.addEventListener('click',function(){document.querySelectorAll('.ts').forEach(function(x){x.classList.remove('sel');});this.classList.add('sel');selTime=this.dataset.time;document.getElementById('btn1').disabled=false;});
+    tc.appendChild(b);
+  });
+}
+
+// ── CONFIRMAR ───────────────────────────
+async function confirmar(){
+  if(_submitting)return;
+  var s=document.getElementById('fi-school').value.trim();
+  var c=document.getElementById('fi-contact').value.trim();
+  var e=document.getElementById('fi-email').value.trim();
+  var p=document.getElementById('fi-phone').value.trim();
+  var g=document.getElementById('fi-guests').value.trim();
+  var er=document.getElementById('ferr');
+  if(!s||!c||!e||!p){er.style.display='block';return;}
+  er.style.display='none';
+  _submitting=true;
+  var btn=document.getElementById('btn2');btn.disabled=true;btn.textContent='Aguarde...';
+
+  var sys=cfg.system||{};
+  var payload={
+    date:         selDate,
+    time:         selTime,
+    meetingType:  selTypeName,
+    duration:     selTypeDur,
+    school:       s,
+    contact:      c,
+    email:        e,
+    phone:        p,
+    guests:       g,
+    calendarId:   sys.calendarId   || cfg.csm.email,
+    meetingTitle: sys.meetingTitle  || 'Reunião ClipEscola',
+    pageUrl:      sys.pageUrl       || '',
+    csmTitle:     cfg.csm.title    || ''
+  };
+
+  var wa=(sys.webhookAgendar)||WA;
+
+  try{
+    var r=await fetch(wa,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    var resp=await r.json().catch(function(){return{};});
+    // Trata: HTTP não-2xx, success===false explícito, ou body vazio num erro
+    if(!r.ok||!resp||resp.success===false||resp.status==='error'){
+      er.textContent=resp.error||'Não foi possível confirmar o agendamento. Tente novamente ou entre em contato.';
+      er.style.display='block';_submitting=false;btn.disabled=false;btn.textContent='Confirmar agendamento';return;
+    }
+    showPub('succ');
+    var ml=resp.meetLink||null;
+    var dt=new Date(selDate+'T12:00:00');
+    var meetEl=ml
+      ?"<div class='meet-box'><div class='meet-ttl'>🎥 Link da reunião</div><div class='meet-row'><span class='meet-link' id='meet-url'>"+ml+"</span><button class='copy-btn' id='copy-btn'>Copiar</button></div></div>"
+      :"<div style='margin-top:10px;font-size:12px;color:#6b7280'>O link do Meet será enviado por e-mail.</div>";
+    document.getElementById('sd').innerHTML=
+      '<div style="margin-bottom:4px"><strong>'+escH(selTypeName)+'</strong> com <strong>'+escH(cfg.csm.name||'Davi')+'</strong></div>'
+      +'<div style="color:#6b7280">📅 '+DL[dt.getDay()]+', '+dt.getDate()+' de '+MONTHS[dt.getMonth()]+' de '+cy+'</div>'
+      +'<div style="color:#6b7280">🕐 '+selTime+' – '+addMin(selTime,selTypeDur)+' <strong style="color:#854d0e">· Horário de Brasília (GMT-3)</strong></div>'
+      +meetEl;
+    var cb=document.getElementById('copy-btn');
+    if(cb&&ml)cb.addEventListener('click',function(){navigator.clipboard.writeText(ml).then(function(){cb.textContent='Copiado!';setTimeout(function(){cb.textContent='Copiar';},2000);});});
+  }catch(err){
+    er.textContent='Erro de conexão. Tente novamente.';er.style.display='block';
+    _submitting=false;btn.disabled=false;btn.textContent='Confirmar agendamento';
+  }
+}
+
+// ── UTIL ────────────────────────────────
+function escH(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// ── INIT ────────────────────────────────
+document.addEventListener('DOMContentLoaded',async function(){
+  // Sempre carrega config do n8n (fonte de verdade)
+  await loadCfg();
+
+  updatePublicHero();
+  renderPublicTypes();
+
+  document.getElementById('btn0').addEventListener('click',function(){
+    if(this.disabled)return;
+    showPub('s1');
+    cy=new Date().getFullYear();cm=new Date().getMonth();
+    // atualiza hero meta com duração do tipo selecionado
+    var dur=selTypeDur;
+    var label=dur>=60&&dur%60===0?(dur/60)+(dur/60===1?' hora':' horas'):dur+' min';
+    document.getElementById('hero-meta').textContent='🕐 '+label+' · 🌎 Horário de Brasília';
+    loadAvailability();
+  });
+
+  document.getElementById('back1').addEventListener('click',function(){showPub('s0');selDate='';selTime='';});
+  document.getElementById('btn1').addEventListener('click',function(){
+    if(this.disabled)return;
+    showPub('s2');
+    var dt=new Date(selDate+'T12:00:00');
+    document.getElementById('ibar').textContent='📅 '+DL[dt.getDay()]+', '+dt.getDate()+' de '+MONTHS[dt.getMonth()]+' de '+cy+' às '+selTime+' · '+selTypeName+' (Horário de Brasília)';
+  });
+  document.getElementById('btn2').addEventListener('click',confirmar);
+  document.getElementById('back2').addEventListener('click',function(){showPub('s1');});
+  document.getElementById('prev-m').addEventListener('click',function(){cm--;if(cm<0){cm=11;cy--;}availDays={};loadAvailability();});
+  document.getElementById('next-m').addEventListener('click',function(){cm++;if(cm>11){cm=0;cy++;}availDays={};loadAvailability();});
+  document.getElementById('succ-btn').addEventListener('click',function(){location.reload();});
+  document.getElementById('adm-pw').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});
+  if(location.hash==='#admin')goAdmin();
+});
+</script>
+
+
+</body><dubble-extension id="__dubble0394030940.8437584601976651781788569802"></dubble-extension></html>
