@@ -344,8 +344,12 @@ var cfg = {
   csm:          { name:'Davi Morais', title:'Customer Success Manager', email:'davimorais.clipescola@gmail.com', icsUrl:'https://calendar.google.com/calendar/ical/davimorais.clipescola%40gmail.com/public/basic.ics', status:'active' },
   system:       { webhookVerificar: WV, webhookAgendar: WA, calendarId:'davimorais.clipescola@gmail.com', sheetId:'', meetingTitle:'Reunião ClipEscola', slaHours:48, pageUrl:'https://clipescola-gp.github.io/agendamentos-davi/' },
   meetingTypes: [
-    { id:'mt1', name:'Treinamento',  duration:60, active:true, slots:[] },
-    { id:'mt2', name:'Tira-dúvidas', duration:60, active:true, slots:[] }
+    { id:'mt1',          name:'Treinamento ClipEscola',   duration:120, active:true, slots:[], desc:'Para novas escolas, que ainda não utilizam a plataforma e aplicativo ClipEscola. Treinamento completo!' },
+    { id:'mt2',          name:'Expansão de Uso',          duration:120, active:true, slots:[], desc:'Para escolas que estão realizando a implantação do ClipEscola e desejam expandir o uso.' },
+    { id:'idmqib5jdsqa', name:'Módulos Extras',           duration:60,  active:true, slots:[], desc:'Para configurações e treinamentos de módulos extras (escolas que já usam a agenda).' },
+    { id:'idmqib8ve7rm', name:'Validação de Integrações', duration:60,  active:true, slots:[], desc:'Integração está pronta, reunião para realizar a validação e liberação da integração.' },
+    { id:'idmqib9vfuh8', name:'Alinhamentos',             duration:60,  active:true, slots:[], desc:'Para diversos alinhamentos, organização de projetos, cronogramas, estratégias...' },
+    { id:'idmqiban1ofz', name:'Assistência',              duration:60,  active:true, slots:[], desc:'Para tirar dúvidas, questões de usabilidade, recursos extras e configurações.' }
   ]
 };
 
@@ -568,7 +572,7 @@ function buildSlotRow(mtId, slot, idx){
   [1,2,3,4,5,6,0].forEach(function(d){
     var o=document.createElement('option');
     o.value=d;o.textContent=DOWNAMES[d];
-    if(slot.day===d)o.selected=true;
+    if(+slot.day===d)o.selected=true;
     sel.appendChild(o);
   });
 
@@ -613,7 +617,7 @@ function readSlotsFromDom(){
   rows.forEach(function(row){
     var dow=+row.querySelector('.slot-dow').value;
     var time=row.querySelector('.slot-time').value;
-    if(time)mt.slots.push({day:dow,time:time});
+    if(time)mt.slots.push({day:+dow,time:time});
   });
 }
 
