@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head>
+<html lang="pt-BR">
+<head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Agendamentos – Davi | ClipEscola</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Nunito,sans-serif;background:#f0f2f7;min-height:100vh}
@@ -131,16 +132,16 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
 
 <div class="hdr">
   <img src="https://i.imgur.com/IVPOWqc.png" alt="ClipEscola" onerror="this.style.display='none'" style="height:36px;object-fit:contain">
-  <div class="badge" id="hdr-badge">Retaguarda</div>
-  <span id="admin-gear" onclick="goAdmin()" title="Retaguarda" style="visibility: hidden;">⚙</span>
+  <div class="badge" id="hdr-badge">CS – DAVI MORAIS</div>
+  <span id="admin-gear" onclick="goAdmin()" title="Retaguarda">⚙</span>
 </div>
 
 <!-- ══════════════════════════ PÚBLICO ══════════════════════════ -->
-<div id="view-public" class="hd">
+<div id="view-public">
   <div class="hero" id="hero-area">
     <div class="hero-tag">Agendamentos ClipEscola</div>
     <h1 id="hero-name">Davi Morais</h1>
-    <div class="hero-sub" id="hero-title" style="display: block;">Customer Success Manager</div>
+    <div class="hero-sub" id="hero-title"></div>
     <p>Agende agora sua próxima reunião.</p>
     <div class="hero-meta" id="hero-meta">🌎 Horário de Brasília</div>
     <div class="hero-steps">
@@ -154,9 +155,9 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
     <!-- Step 0: Tipo de reunião -->
     <div id="s0" class="card">
       <div class="ttl">Qual o tipo de reunião?</div>
-      <div id="type-list"><div class="tc" data-id="mt1"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Treinamento ClipEscola</span><span class="td">🕐 2 horas</span></div><div class="tc-desc">Para novas escolas, que ainda não utilizam a plataforma e aplicativo ClipEscola. Treinamento completo!</div></div></div><div class="tc" data-id="mt2"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Expansão de Uso</span><span class="td">🕐 2 horas</span></div><div class="tc-desc">Para escolas que estão realizando a implantação do ClipEscola e desejam expandir o uso.</div></div></div><div class="tc" data-id="idmqib5jdsqa"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Módulos Extras</span><span class="td">🕐 1 hora</span></div><div class="tc-desc">Para configurações e treinamentos de módulos extras (escolas que já usam a agenda).</div></div></div><div class="tc" data-id="idmqib8ve7rm"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Validação de Integrações</span><span class="td">🕐 1 hora</span></div><div class="tc-desc">Integração está pronta, reunião para realizar a validação e liberação da integração.</div></div></div><div class="tc" data-id="idmqib9vfuh8"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Alinhamentos</span><span class="td">🕐 1 hora</span></div><div class="tc-desc">Para diversos alinhamentos, organização de projetos, cronogramas, estratégias...</div></div></div><div class="tc" data-id="idmqiban1ofz"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span class="tn">Assistência</span><span class="td">🕐 1 hora</span></div><div class="tc-desc">Para tirar dúvidas, questões de usabilidade, recursos extras e configurações.</div></div></div></div>
+      <div id="type-list"></div>
       <div id="no-types" class="hd" style="color:#6b7280;font-size:14px;padding:12px 0">Nenhum tipo de reunião configurado.</div>
-      <button class="btn" id="btn0" disabled="" style="margin-top:12px">Próximo →</button>
+      <button class="btn" id="btn0" disabled style="margin-top:12px">Próximo →</button>
     </div>
 
     <!-- Step 1: Calendário -->
@@ -164,9 +165,9 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <div class="ttl" style="margin:0">Escolha a data e horário</div>
         <div class="cnav">
-          <button id="prev-m">‹</button>
+          <button id="prev-m">&#8249;</button>
           <span id="cal-lbl" style="font-size:13px;font-weight:700;min-width:110px;text-align:center"></span>
-          <button id="next-m">›</button>
+          <button id="next-m">&#8250;</button>
         </div>
       </div>
       <div class="tz-note">🌎 Horário de Brasília (GMT-3)</div>
@@ -177,7 +178,7 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
       </div>
       <div style="display:flex;justify-content:space-between;margin-top:16px">
         <button class="back" id="back1">← Voltar</button>
-        <button class="btn" id="btn1" disabled="">Próximo →</button>
+        <button class="btn" id="btn1" disabled>Próximo →</button>
       </div>
     </div>
 
@@ -211,14 +212,14 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
 </div>
 
 <!-- ══════════════════════════ ADMIN ══════════════════════════ -->
-<div id="view-admin" class="">
+<div id="view-admin" class="hd">
 
   <!-- Login -->
-  <div class="login-wrap hd" id="adm-login">
+  <div class="login-wrap" id="adm-login">
     <div class="login-box">
       <div style="font-size:36px;margin-bottom:10px">🔐</div>
       <div style="font-size:17px;font-weight:800;color:#22367b;margin-bottom:4px">Retaguarda</div>
-      <div style="font-size:13px;color:#6b7280;margin-bottom:20px">Davi – ClipEscola</div>
+      <div style="font-size:13px;color:#6b7280;margin-bottom:20px">Davi Morais – ClipEscola</div>
       <input type="password" id="adm-pw" placeholder="Senha" style="margin-bottom:10px" autocomplete="off">
       <button class="btn" style="width:100%" onclick="checkPw()">Entrar</button>
       <div id="pw-err" style="color:#dc2626;font-size:12px;margin-top:8px;display:none">Senha incorreta.</div>
@@ -226,7 +227,7 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
   </div>
 
   <!-- Painel -->
-  <div id="adm-panel" class="">
+  <div id="adm-panel" class="hd">
     <div class="adm-wrap">
 
       <!-- Header info -->
@@ -241,14 +242,14 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
 
       <!-- Tabs -->
       <div class="tab-nav">
-        <button class="tab-btn" onclick="switchTab('dados')" id="tab-dados">👤 Dados do CSM</button>
-        <button class="tab-btn" onclick="switchTab('horarios')" id="tab-horarios">📅 Horários</button>
-        <button class="tab-btn" onclick="switchTab('tipos')" id="tab-tipos">🎯 Tipos de Reunião</button>
-        <button class="tab-btn active" onclick="switchTab('config')" id="tab-config">⚙️ Configurações</button>
+        <button class="tab-btn active" onclick="switchTab('dados')"    id="tab-dados">👤 Dados do CSM</button>
+        <button class="tab-btn"        onclick="switchTab('horarios')" id="tab-horarios">📅 Horários</button>
+        <button class="tab-btn"        onclick="switchTab('tipos')"    id="tab-tipos">🎯 Tipos de Reunião</button>
+        <button class="tab-btn"        onclick="switchTab('config')"   id="tab-config">⚙️ Configurações</button>
       </div>
 
       <!-- Aba: Dados do CSM -->
-      <div class="tab-panel" id="panel-dados">
+      <div class="tab-panel active" id="panel-dados">
         <div class="section-ttl">● Informações do CSM</div>
         <div class="frow">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -280,12 +281,12 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
       <div class="tab-panel" id="panel-horarios">
         <div class="section-ttl">📅 Horários Disponíveis</div>
         <div style="font-size:13px;color:#6b7280;margin-bottom:16px">Novos tipos aparecem automaticamente nesta aba ao serem criados.</div>
-        <div id="type-tabs-horarios" class="type-tabs"><button class="type-tab active">Treinamento ClipEscola (2 horas)</button><button class="type-tab">Expansão de Uso (2 horas)</button><button class="type-tab">Módulos Extras (1 hora)</button><button class="type-tab">Validação de Integrações (1 hora)</button><button class="type-tab">Alinhamentos (1 hora)</button><button class="type-tab">Assistência (1 hora)</button></div>
-        <div id="slots-editor"><div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:12px">Treinamento ClipEscola<span style="color:#6b7280;font-weight:600;font-size:12px;margin-left:8px">Duração: 120 min</span></div><div class="slot-row" data-mtid="mt1" data-idx="0"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 11:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="1"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 16:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="2"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 16:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="3"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 11:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="4"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 16:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="5"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 11:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="6"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 16:30</span><button class="btn-rm">Remover</button></div><div class="slot-row" data-mtid="mt1" data-idx="7"><select class="slot-dow"><option value="1">Segunda</option><option value="2">Terça</option><option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option><option value="0">Domingo</option></select><input type="time" class="slot-time"><span class="until">até 11:30</span><button class="btn-rm">Remover</button></div></div>
+        <div id="type-tabs-horarios" class="type-tabs"></div>
+        <div id="slots-editor"></div>
         <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
           <button class="btn-outline" onclick="addSlotRow()">+ Horário</button>
           <button class="btn" onclick="salvarHorarios()">💾 Salvar</button>
-          <button class="btn-outline" onclick="copiarParaTodos()" style="background:#fef9c3;border-color:#fde047;color:#713f12">📋 Copiar para...</button>
+          <button class="btn-outline" onclick="copiarParaTodos()" style="background:#fef9c3;border-color:#fde047;color:#713f12">📋 Copiar para todos</button>
         </div>
         <div class="adm-msg-bar" id="msg-horarios"></div>
       </div>
@@ -294,7 +295,7 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
       <div class="tab-panel" id="panel-tipos">
         <div class="section-ttl">🎯 Tipos de Reunião</div>
         <div style="font-size:13px;color:#6b7280;margin-bottom:16px">Novos tipos aparecem automaticamente na aba Horários.</div>
-        <div id="mt-list"><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="mt1" value="Treinamento ClipEscola" oninput="updateMtPreview('mt1')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="mt1" type="number" min="15" max="480" step="15" value="120" oninput="updateMtPreview('mt1')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="mt1" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('mt1')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="mt1" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para novas escolas, que ainda não utilizam a plataforma e aplicativo ClipEscola. Treinamento completo!</textarea></div><div class="mt-preview" id="mtp-mt1">Preview: <strong>Treinamento ClipEscola (2h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="mt2" value="Expansão de Uso" oninput="updateMtPreview('mt2')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="mt2" type="number" min="15" max="480" step="15" value="120" oninput="updateMtPreview('mt2')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="mt2" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('mt2')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="mt2" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para escolas que estão realizando a implantação do ClipEscola e desejam expandir o uso.</textarea></div><div class="mt-preview" id="mtp-mt2">Preview: <strong>Expansão de Uso (2h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="idmqib5jdsqa" value="Módulos Extras" oninput="updateMtPreview('idmqib5jdsqa')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="idmqib5jdsqa" type="number" min="15" max="480" step="15" value="60" oninput="updateMtPreview('idmqib5jdsqa')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="idmqib5jdsqa" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('idmqib5jdsqa')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="idmqib5jdsqa" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para configurações e treinamentos de módulos extras (escolas que já usam a agenda).</textarea></div><div class="mt-preview" id="mtp-idmqib5jdsqa">Preview: <strong>Módulos Extras (1h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="idmqib8ve7rm" value="Validação de Integrações" oninput="updateMtPreview('idmqib8ve7rm')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="idmqib8ve7rm" type="number" min="15" max="480" step="15" value="60" oninput="updateMtPreview('idmqib8ve7rm')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="idmqib8ve7rm" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('idmqib8ve7rm')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="idmqib8ve7rm" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Integração está pronta, reunião para realizar a validação e liberação da integração.</textarea></div><div class="mt-preview" id="mtp-idmqib8ve7rm">Preview: <strong>Validação de Integrações (1h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="idmqib9vfuh8" value="Alinhamentos" oninput="updateMtPreview('idmqib9vfuh8')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="idmqib9vfuh8" type="number" min="15" max="480" step="15" value="60" oninput="updateMtPreview('idmqib9vfuh8')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="idmqib9vfuh8" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('idmqib9vfuh8')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="idmqib9vfuh8" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para diversos alinhamentos, organização de projetos, cronogramas, estratégias...</textarea></div><div class="mt-preview" id="mtp-idmqib9vfuh8">Preview: <strong>Alinhamentos (1h)</strong></div></div><div class="mt-row"><div class="mt-fields"><div><label>Nome</label><input class="mt-name" data-id="idmqiban1ofz" value="Assistência" oninput="updateMtPreview('idmqiban1ofz')" placeholder="Ex: Treinamento"></div><div><label>Duração (min)</label><input class="mt-dur" data-id="idmqiban1ofz" type="number" min="15" max="480" step="15" value="60" oninput="updateMtPreview('idmqiban1ofz')"></div><div style="text-align:center;padding-top:20px"><input class="mt-active" data-id="idmqiban1ofz" type="checkbox" checked=""></div><div style="padding-top:20px"><button class="btn-rm" onclick="removeMt('idmqiban1ofz')">Remover</button></div></div><div style="margin-top:10px"><label style="margin-bottom:6px">Descrição <span style="font-weight:600;color:#9ca3af">(aparece na página para ajudar o cliente a escolher)</span></label><textarea class="mt-desc" data-id="idmqiban1ofz" rows="2" placeholder="Ex: Para novos usuários que precisam aprender a usar a plataforma. Duração de 2h com apresentação completa." style="resize:vertical">Para tirar dúvidas, questões de usabilidade, recursos extras e configurações.</textarea></div><div class="mt-preview" id="mtp-idmqiban1ofz">Preview: <strong>Assistência (1h)</strong></div></div></div>
+        <div id="mt-list"></div>
         <div style="display:flex;gap:10px;margin-top:16px">
           <button class="btn-outline" onclick="addMeetingType()">+ Adicionar tipo</button>
           <button class="btn" onclick="salvarTipos()">💾 Salvar</button>
@@ -303,7 +304,7 @@ input[readonly]{background:#f9fafb;color:#6b7280;cursor:default}
       </div>
 
       <!-- Aba: Configurações -->
-      <div class="tab-panel active" id="panel-config">
+      <div class="tab-panel" id="panel-config">
         <div class="section-ttl">● Configurações do sistema</div>
         <div class="frow">
           <div><label>Webhook Verificar</label><input id="c-wv" placeholder="https://n8n.clipescola.com.br/webhook/verificar-davi"></div>
@@ -340,35 +341,16 @@ var WC_SAVE = 'https://n8n.clipescola.com.br/webhook/config-davi-save';
 var ADMIN_PW = 'clip2025';
 // ══════════════════════════════════════════════════════════════
 
-// Padrão 2h: Seg 09:30, Seg 14:30, Ter 14:30, Qua 09:30, Qua 14:30, Qui 09:30, Qui 14:30, Sex 09:30
-var SLOTS_2H = [
-  {day:1,time:'09:30'},{day:1,time:'14:30'},
-  {day:2,time:'14:30'},
-  {day:3,time:'09:30'},{day:3,time:'14:30'},
-  {day:4,time:'09:30'},{day:4,time:'14:30'},
-  {day:5,time:'09:30'}
-];
-// Padrão 1h: Seg 09:00, Seg 11:00, Seg 14:00, Seg 15:30, Ter 14:00, Ter 15:30,
-//            Qua 09:00, Qua 11:00, Qua 14:00, Qua 15:30, Qui 09:00, Qui 11:00,
-//            Qui 14:00, Qui 15:30, Sex 09:00, Sex 11:00
-var SLOTS_1H = [
-  {day:1,time:'09:00'},{day:1,time:'11:00'},{day:1,time:'14:00'},{day:1,time:'15:30'},
-  {day:2,time:'14:00'},{day:2,time:'15:30'},
-  {day:3,time:'09:00'},{day:3,time:'11:00'},{day:3,time:'14:00'},{day:3,time:'15:30'},
-  {day:4,time:'09:00'},{day:4,time:'11:00'},{day:4,time:'14:00'},{day:4,time:'15:30'},
-  {day:5,time:'09:00'},{day:5,time:'11:00'}
-];
-
 var cfg = {
-  csm:          { name:'Davi', title:'Customer Success Manager', email:'davimorais.clipescola@gmail.com', icsUrl:'https://calendar.google.com/calendar/ical/davimorais.clipescola%40gmail.com/public/basic.ics', status:'active' },
+  csm:          { name:'Davi Morais', title:'Customer Success Manager', email:'davimorais.clipescola@gmail.com', icsUrl:'https://calendar.google.com/calendar/ical/davimorais.clipescola%40gmail.com/public/basic.ics', status:'active' },
   system:       { webhookVerificar: WV, webhookAgendar: WA, calendarId:'davimorais.clipescola@gmail.com', sheetId:'', meetingTitle:'Reunião ClipEscola', slaHours:48, pageUrl:'https://clipescola-gp.github.io/agendamentos-davi/' },
   meetingTypes: [
-    { id:'mt1',          name:'Treinamento ClipEscola',    duration:120, active:true, desc:'Para novas escolas, que ainda não utilizam a plataforma e aplicativo ClipEscola. Treinamento completo!',                                                   slots: JSON.parse(JSON.stringify(SLOTS_2H)) },
-    { id:'mt2',          name:'Expansão de Uso',           duration:120, active:true, desc:'Para escolas que estão realizando a implantação do ClipEscola e desejam expandir o uso.',                                                                  slots: JSON.parse(JSON.stringify(SLOTS_2H)) },
-    { id:'idmqib5jdsqa', name:'Módulos Extras',            duration:60,  active:true, desc:'Para configurações e treinamentos de módulos extras (escolas que já usam a agenda).',                                                                      slots: JSON.parse(JSON.stringify(SLOTS_1H)) },
-    { id:'idmqib8ve7rm', name:'Validação de Integrações',  duration:60,  active:true, desc:'Integração está pronta, reunião para realizar a validação e liberação da integração.',                                                                     slots: JSON.parse(JSON.stringify(SLOTS_1H)) },
-    { id:'idmqib9vfuh8', name:'Alinhamentos',              duration:60,  active:true, desc:'Para diversos alinhamentos, organização de projetos, cronogramas, estratégias...',                                                                         slots: JSON.parse(JSON.stringify(SLOTS_1H)) },
-    { id:'idmqiban1ofz', name:'Assistência',               duration:60,  active:true, desc:'Para tirar dúvidas, questões de usabilidade, recursos extras e configurações.',                                                                            slots: JSON.parse(JSON.stringify(SLOTS_1H)) }
+    { id:'mt1',          name:'Treinamento ClipEscola',   duration:120, active:true, slots:[], desc:'Para novas escolas, que ainda não utilizam a plataforma e aplicativo ClipEscola. Treinamento completo!' },
+    { id:'mt2',          name:'Expansão de Uso',          duration:120, active:true, slots:[], desc:'Para escolas que estão realizando a implantação do ClipEscola e desejam expandir o uso.' },
+    { id:'idmqib5jdsqa', name:'Módulos Extras',           duration:60,  active:true, slots:[], desc:'Para configurações e treinamentos de módulos extras (escolas que já usam a agenda).' },
+    { id:'idmqib8ve7rm', name:'Validação de Integrações', duration:60,  active:true, slots:[], desc:'Integração está pronta, reunião para realizar a validação e liberação da integração.' },
+    { id:'idmqib9vfuh8', name:'Alinhamentos',             duration:60,  active:true, slots:[], desc:'Para diversos alinhamentos, organização de projetos, cronogramas, estratégias...' },
+    { id:'idmqiban1ofz', name:'Assistência',              duration:60,  active:true, slots:[], desc:'Para tirar dúvidas, questões de usabilidade, recursos extras e configurações.' }
   ]
 };
 
@@ -459,7 +441,7 @@ function renderAdminAll(){
   document.getElementById('d-ics').value     = cfg.csm.icsUrl  || '';
   document.getElementById('d-status').value  = cfg.csm.status  || 'active';
   // header
-  document.getElementById('adm-hdr-sub').textContent = (cfg.csm.name||'Davi') + (cfg.csm.title?' · '+cfg.csm.title:'');
+  document.getElementById('adm-hdr-sub').textContent = (cfg.csm.name||'Davi') + (cfg.csm.title?' · '+cfg.csm.title:'Customer Success Manager');
   var badge = document.getElementById('adm-status-badge');
   badge.textContent = cfg.csm.status==='inactive'?'● Inativo':'● Ativo';
   badge.className   = 'adm-status'+(cfg.csm.status==='inactive'?' inactive':'');
@@ -591,7 +573,7 @@ function buildSlotRow(mtId, slot, idx){
   [1,2,3,4,5,6,0].forEach(function(d){
     var o=document.createElement('option');
     o.value=d;o.textContent=DOWNAMES[d];
-    if(slot.day===d||+slot.day===d)o.selected=true;
+    if(slot.day===d)o.selected=true;
     sel.appendChild(o);
   });
 
@@ -619,23 +601,11 @@ function buildSlotRow(mtId, slot, idx){
   return div;
 }
 
-// Ordem de exibição: Seg(1) Ter(2) Qua(3) Qui(4) Sex(5) Sáb(6) Dom(0)
-var DOW_ORDER = {1:0,2:1,3:2,4:3,5:4,6:5,0:6};
-function sortSlots(slots){
-  return slots.slice().sort(function(a,b){
-    var da=DOW_ORDER[a.day]!==undefined?DOW_ORDER[a.day]:7;
-    var db=DOW_ORDER[b.day]!==undefined?DOW_ORDER[b.day]:7;
-    if(da!==db)return da-db;
-    return a.time.localeCompare(b.time);
-  });
-}
-
 function addSlotRow(){
   var mt=cfg.meetingTypes.find(function(x){return x.id===activeTypeTabId;});
   if(!mt){toast('Selecione um tipo de reunião primeiro.');return;}
   if(!mt.slots)mt.slots=[];
   mt.slots.push({day:1,time:'09:00'});
-  mt.slots=sortSlots(mt.slots);
   renderSlotsEditor(activeTypeTabId);
   renderTypeTabsHorarios();
 }
@@ -646,53 +616,26 @@ function readSlotsFromDom(){
   if(!mt)return;
   mt.slots=[];
   rows.forEach(function(row){
-    var dow=parseInt(row.querySelector('.slot-dow').value,10);
+    var dow=+row.querySelector('.slot-dow').value;
     var time=row.querySelector('.slot-time').value;
     if(time)mt.slots.push({day:dow,time:time});
   });
-  mt.slots=sortSlots(mt.slots);
 }
 
 function copiarParaTodos(){
   readSlotsFromDom();
   var src=cfg.meetingTypes.find(function(x){return x.id===activeTypeTabId;});
   if(!src){toast('Nenhum tipo ativo.');return;}
-  var others=cfg.meetingTypes.filter(function(mt){return mt.id!==activeTypeTabId&&mt.active;});
-  if(!others.length){toast('Nenhum outro tipo ativo para copiar.');return;}
-  var overlay=document.createElement('div');
-  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px';
-  var box=document.createElement('div');
-  box.style.cssText='background:#fff;border-radius:14px;padding:28px;max-width:380px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.18)';
-  var html='<div style="font-size:15px;font-weight:800;color:#22367b;margin-bottom:6px">&#128203; Copiar horarios para...</div>'
-    +'<div style="font-size:13px;color:#6b7280;margin-bottom:18px">Copiar os horarios de <strong style="color:#22367b">'+escH(src.name)+'</strong> para:</div>';
-  others.forEach(function(mt){
-    html+='<label style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;border:1.5px solid #e5e7eb;margin-bottom:8px;cursor:pointer;font-size:13px;font-weight:700;color:#374151">'
-      +'<input type="checkbox" class="copy-chk" data-id="'+mt.id+'" style="width:16px;height:16px;accent-color:#22367b;flex-shrink:0"> '+escH(mt.name)+'</label>';
+  if(!confirm('Copiar os horários de "'+src.name+'" para todos os outros tipos ativos?'))return;
+  cfg.meetingTypes.forEach(function(mt){
+    if(mt.id!==activeTypeTabId&&mt.active)
+      mt.slots=JSON.parse(JSON.stringify(src.slots));
   });
-  html+='<div style="display:flex;gap:8px;margin-top:18px">'
-    +'<button id="copy-modal-cancel" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid #e5e7eb;background:#f9fafb;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;color:#6b7280">Cancelar</button>'
-    +'<button id="copy-modal-ok" style="flex:1;padding:10px;border-radius:8px;border:none;background:#22367b;color:#fff;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit">Copiar</button>'
-    +'</div>';
-  box.innerHTML=html;
-  overlay.appendChild(box);
-  document.body.appendChild(overlay);
-  document.getElementById('copy-modal-cancel').onclick=function(){document.body.removeChild(overlay);};
-  overlay.addEventListener('click',function(e){if(e.target===overlay)document.body.removeChild(overlay);});
-  document.getElementById('copy-modal-ok').onclick=function(){
-    var checked=[].slice.call(box.querySelectorAll('.copy-chk:checked'));
-    if(!checked.length){toast('Selecione ao menos um tipo.');return;}
-    checked.forEach(function(chk){
-      var mt=cfg.meetingTypes.find(function(x){return x.id===chk.dataset.id;});
-      if(mt)mt.slots=JSON.parse(JSON.stringify(src.slots));
-    });
-    document.body.removeChild(overlay);
-    toast('Horarios copiados para '+checked.length+' tipo(s).');
-  };
+  toast('Horários copiados para todos os tipos.');
 }
 
 async function salvarHorarios(){
   readSlotsFromDom();
-  renderSlotsEditor(activeTypeTabId);
   var ok=await pushConfig();
   showMsg('msg-horarios', ok?'✅ Horários salvos com sucesso!':'⚠️ Erro ao salvar.', ok);
 }
@@ -706,7 +649,7 @@ async function salvarDados(){
   cfg.csm.status  = document.getElementById('d-status').value;
   var ok=await pushConfig();
   if(ok){
-    document.getElementById('adm-hdr-sub').textContent=(cfg.csm.name||'Davi')+(cfg.csm.title?' · '+cfg.csm.title:'');
+    document.getElementById('adm-hdr-sub').textContent=(cfg.csm.name||'Davi')+(cfg.csm.title?' · '+cfg.csm.title:'Customer Success Manager');
     var badge=document.getElementById('adm-status-badge');
     badge.textContent=cfg.csm.status==='inactive'?'● Inativo':'● Ativo';
     badge.className='adm-status'+(cfg.csm.status==='inactive'?' inactive':'');
@@ -741,27 +684,14 @@ async function pushConfig(){
 // O HTML baixado sempre busca a config do n8n no loadCfg().
 // Edite pelo admin e salve — a página publicada atualiza automaticamente.
 function baixarHtml(){
-  // Garante que os slots do tipo ativo estão no cfg antes de baixar
-  readSlotsFromDom();
-
-  // Serializa o cfg atual e injeta no HTML para que a versão baixada tenha os dados embutidos
-  var cfgJson = JSON.stringify(cfg);
-  var source = document.documentElement.outerHTML;
-
-  // Substitui o bloco "var cfg = {...};" pelo cfg atual
-  var updated = source.replace(
-    /var cfg\s*=\s*\{[\s\S]*?\};\s*\n\s*var availDays/,
-    'var cfg = ' + cfgJson + ';\nvar availDays'
-  );
-
-  var html = '<!DOCTYPE html>\n' + updated;
+  var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
   var blob = new Blob([html], {type:'text/html;charset=utf-8'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'index.html';
   a.click();
   URL.revokeObjectURL(a.href);
-  toast('\u2705 index.html baixado com config atual!');
+  toast('\u2705 index.html baixado! Config sempre via n8n.');
 }
 
 // ── PÚBLICO: HERO ───────────────────────
@@ -974,6 +904,5 @@ document.addEventListener('DOMContentLoaded',async function(){
   if(location.hash==='#admin')goAdmin();
 });
 </script>
-
-
-</body><dubble-extension id="__dubble0394030940.8437584601976651781788569802"></dubble-extension></html>
+</body>
+</html>
